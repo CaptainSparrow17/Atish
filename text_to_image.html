@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Generate an Image from Text</h1>
-    
+
     <!-- Form to input the prompt -->
     <form id="image-form">
         <label for="prompt">Enter a prompt for the image:</label>
@@ -15,23 +15,26 @@
         <button type="submit">Generate Image</button>
     </form>
 
-    <!-- Where the generated image will be displayed -->
+    <!-- Where the generated image or error will be displayed -->
     <div id="result">
         <p id="loading-message" style="display:none;">Generating image... Please wait!</p>
         <img id="generated-image" style="max-width:100%; display:none;" alt="Generated Image">
+        <p id="error-message" style="color: red; display:none;"></p>
     </div>
 
     <script>
         document.getElementById("image-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent form from submitting normally
-            
-            let prompt = document.getElementById("prompt").value;
-            let apiKey = "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"; // Replace with your actual OpenAI API key
+            event.preventDefault();  // Prevent the form from submitting normally
 
-            // Show a loading message
+            let prompt = document.getElementById("prompt").value;
+            let apiKey = "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";  // Replace with your actual OpenAI API key
+
+            // Clear previous results and show a loading message
             document.getElementById("loading-message").style.display = "block";
             document.getElementById("generated-image").style.display = "none";
+            document.getElementById("error-message").style.display = "none";
 
+            // Make the request to the OpenAI API
             fetch("https://api.openai.com/v1/images/generations", {
                 method: "POST",
                 headers: {
@@ -41,7 +44,7 @@
                 body: JSON.stringify({
                     prompt: prompt,
                     n: 1,  // We want only one image
-                    size: "1024x1024"  // Image size
+                    size: "1024x1024"  // You can change this to "512x512" or "256x256"
                 })
             })
             .then(response => response.json())
@@ -49,22 +52,26 @@
                 // Hide the loading message
                 document.getElementById("loading-message").style.display = "none";
 
+                // Check if the API returned an image
                 if (data.data && data.data[0] && data.data[0].url) {
-                    // Set the image source to the generated image URL
+                    // Display the generated image
                     let imgElement = document.getElementById("generated-image");
                     imgElement.src = data.data[0].url;
                     imgElement.style.display = "block";  // Show the image
                 } else {
-                    alert("Error: Could not generate image");
+                    // Display an error message if no image is returned
+                    let errorMessage = data.error ? data.error.message : "Unknown error";
+                    document.getElementById("error-message").innerText = "Error: " + errorMessage;
+                    document.getElementById("error-message").style.display = "block";
                 }
             })
             .catch(error => {
-                console.error("Error:", error);
+                // Hide the loading message and display the error
                 document.getElementById("loading-message").style.display = "none";
-                alert("There was an error generating the image. Please try again.");
+                document.getElementById("error-message").innerText = "Error: " + error.message;
+                document.getElementById("error-message").style.display = "block";
             });
         });
-    </script>
     </script>
 </body>
 </html>
