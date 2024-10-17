@@ -1,1 +1,138 @@
-cool
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Image Generator</title>
+</head>
+<body>
+    <h1>Generate an Image from Text</h1>
+    
+    <!-- Form to input the prompt -->
+    <form id="image-form">
+        <label for="prompt">Enter a prompt for the image:</label>
+        <input type="text" id="prompt" name="prompt" required>
+        <button type="submit">Generate Image</button>
+    </form>
+
+    <!-- Where the generated image will be displayed -->
+    <div id="result">
+        <p id="loading-message" style="display:none;">Generating image... Please wait!</p>
+        <img id="generated-image" style="max-width:100%; display:none;" alt="Generated Image">
+    </div>
+
+    <script>
+        document.getElementById("image-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form from submitting normally
+            
+            let prompt = document.getElementById("prompt").value;
+            let apiKey = "YOUR_OPENAI_API_KEY"; // Replace with your actual OpenAI API key
+
+            // Show a loading message
+            document.getElementById("loading-message").style.display = "block";
+            document.getElementById("generated-image").style.display = "none";
+
+            fetch("https://api.openai.com/v1/images/generations", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + apiKey
+                },
+                body: JSON.stringify({
+                    prompt: prompt,
+                    n: 1,  // We want only one image
+                    size: "1024x1024"  // Image size
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hide the loading message
+                document.getElementById("loading-message").style.display = "none";
+
+                if (data.data && data.data[0] && data.data[0].url) {
+                    // Set the image source to the generated image URL
+                    let imgElement = document.getElementById("generated-image");
+                    imgElement.src = data.data[0].url;
+                    imgElement.style.display = "block";  // Show the image
+                } else {
+                    alert("Error: Could not generate image");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("loading-message").style.display = "none";
+                alert("There was an error generating the image. Please try again.");
+            });
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Image Generator</title>
+</head>
+<body>
+    <h1>Generate an Image from Text</h1>
+    
+    <!-- Form to input the prompt -->
+    <form id="image-form">
+        <label for="prompt">Enter a prompt for the image:</label>
+        <input type="text" id="prompt" name="prompt" required>
+        <button type="submit">Generate Image</button>
+    </form>
+
+    <!-- Where the generated image will be displayed -->
+    <div id="result">
+        <p id="loading-message" style="display:none;">Generating image... Please wait!</p>
+        <img id="generated-image" style="max-width:100%; display:none;" alt="Generated Image">
+    </div>
+
+    <script>
+        document.getElementById("image-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form from submitting normally
+            
+            let prompt = document.getElementById("prompt").value;
+            let apiKey = "YOUR_OPENAI_API_KEY"; // Replace with your actual OpenAI API key
+
+            // Show a loading message
+            document.getElementById("loading-message").style.display = "block";
+            document.getElementById("generated-image").style.display = "none";
+
+            fetch("https://api.openai.com/v1/images/generations", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + apiKey
+                },
+                body: JSON.stringify({
+                    prompt: prompt,
+                    n: 1,  // We want only one image
+                    size: "1024x1024"  // Image size
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hide the loading message
+                document.getElementById("loading-message").style.display = "none";
+
+                if (data.data && data.data[0] && data.data[0].url) {
+                    // Set the image source to the generated image URL
+                    let imgElement = document.getElementById("generated-image");
+                    imgElement.src = data.data[0].url;
+                    imgElement.style.display = "block";  // Show the image
+                } else {
+                    alert("Error: Could not generate image");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("loading-message").style.display = "none";
+                alert("There was an error generating the image. Please try again.");
+            });
+        });
+    </script>
+</body>
+</html>
