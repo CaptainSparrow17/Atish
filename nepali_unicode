@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Nepali Unicode Converter</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
+    <style>
+        /* Inline CSS (for demonstration purposes, can be moved to external file) */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #unicodeOutput {
+            background-color: #e9e9e9;
+            color: #555;
+            font-family: monospace;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nepali Unicode Converter</h1>
+        <textarea id="nepaliInput" placeholder="Type in Nepali..." rows="5"></textarea>
+        <button id="convertBtn">Convert to Unicode</button>
+        <textarea id="unicodeOutput" placeholder="Unicode Output" rows="5" readonly></textarea>
+    </div>
+
+    <script>
+        // JavaScript logic for Nepali to Unicode conversion
+        document.getElementById('convertBtn').addEventListener('click', function() {
+            const nepaliInput = document.getElementById('nepaliInput').value;
+            const unicodeOutput = nepaliToUnicode(nepaliInput);
+            document.getElementById('unicodeOutput').value = unicodeOutput;
+        });
+
+        function nepaliToUnicode(text) {
+            let unicodeText = '';
+            
+            // Simple mapping for demonstration purposes
+            const nepaliChars = {
+                'क': '\\u0915', 'ख': '\\u0916', 'ग': '\\u0917', 'घ': '\\u0918', 'ङ': '\\u0919',
+                'च': '\\u091A', 'छ': '\\u091B', 'ज': '\\u091C', 'झ': '\\u091D', 'ञ': '\\u091E',
+                'ट': '\\u091F', 'ठ': '\\u0920', 'ड': '\\u0921', 'ढ': '\\u0922', 'ण': '\\u0923',
+                'त': '\\u0924', 'थ': '\\u0925', 'द': '\\u0926', 'ध': '\\u0927', 'न': '\\u0928',
+                'प': '\\u092A', 'फ': '\\u092B', 'ब': '\\u092C', 'भ': '\\u092D', 'म': '\\u092E',
+                'य': '\\u092F', 'र': '\\u0930', 'ल': '\\u0932', 'व': '\\u0935', 'श': '\\u0936',
+                'ष': '\\u0937', 'स': '\\u0938', 'ह': '\\u0939'
+            };
+
+            // Loop over the input and convert each character
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                if (nepaliChars[char]) {
+                    unicodeText += nepaliChars[char];
+                } else {
+                    unicodeText += char; // Non-Nepali characters stay the same
+                }
+            }
+            return unicodeText;
+        }
+    </script>
+</body>
+</html>
