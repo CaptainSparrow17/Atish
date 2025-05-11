@@ -1,179 +1,88 @@
-<!DOCTYPE html> 
-<html lang="en"> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Your Name/Handle] - IT Enthusiast</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>[Your Name/Handle]</h1>
+            <p class="tagline">Passionate IT Enthusiast & Lifelong Learner</p>
+        </div>
+    </header>
 
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content= 
-        "width=device-width, initial-scale=1.0"> 
-    <style> 
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-        } 
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#interests">My Interests</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        header { 
-            background-color: #ffffff; 
-            color: #000000; 
-            text-align: center; 
-        } 
+    <main class="container">
+        <section id="hero">
+            <h2>Welcome to My Digital Space!</h2>
+            <p>Exploring the fascinating world of technology, one discovery at a time.</p>
+            <button id="ctaButton">Learn More About My Journey!</button>
+        </section>
 
-        nav { 
-            background-color: #242424; 
-            padding: 10px; 
-        } 
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Hello! I'm [Your Name/Handle], an avid IT enthusiast. I'm fascinated by [mention a specific area like cybersecurity, networking, web development, cloud computing, etc.]. I love tinkering with hardware, exploring new software, and solving complex problems. This website is a small corner of the internet where I share my passion and journey.</p>
+        </section>
 
-        nav a { 
-            color: #fff; 
-            text-decoration: none; 
-            padding: 10px; 
-            margin-right: 10px; 
-            display: inline-block; 
-        } 
+        <section id="interests">
+            <h2>My Interests</h2>
+            <ul>
+                <li>Learning new programming languages (Currently exploring: [e.g., Python, JavaScript])</li>
+                <li>Setting up and managing home lab environments ([e.g., Proxmox, Docker])</li>
+                <li>Cybersecurity fundamentals and ethical hacking</li>
+                <li>Open Source Software and Communities</li>
+                <li>[Add another interest here]</li>
+            </ul>
+        </section>
 
-        .container { 
-            display: flex; 
-            justify-content: space-between; 
-            max-width: 95%; 
-            margin: 0 auto; 
-            padding: 20px; 
-        } 
+        <section id="projects">
+            <h2>Projects / Learning Goals</h2>
+            <div class="project-item">
+                <h3>Personal Website (This one!)</h3>
+                <p><strong>Goal:</strong> To learn HTML, CSS, and JavaScript basics and have an online presence.</p>
+                <p><strong>Status:</strong> In Progress!</p>
+            </div>
+            <div class="project-item">
+                <h3>[Your Next Learning Goal/Project Title]</h3>
+                <p><strong>Goal:</strong> [Describe what you want to learn or build]</p>
+                <p><strong>Status:</strong> Planning / Learning</p>
+            </div>
+            <!-- Add more project items as needed -->
+        </section>
 
-        article p { 
-            text-align: justify; 
-        } 
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <p>I'm always happy to connect with fellow tech enthusiasts!</p>
+            <p>
+                You can find me on:
+                <!-- Replace # with your actual links -->
+                <a href="#" target="_blank">LinkedIn</a> |
+                <a href="#" target="_blank">GitHub</a> |
+                <a href="#" target="_blank">Twitter/X</a>
+                <!-- Or add: <p>Email: your-email@example.com</p> (Be cautious about spam) -->
+            </p>
+        </section>
+    </main>
 
-        main { 
-            flex: 2; 
-        } 
+    <footer>
+        <div class="container">
+            <p>© 2023 [Your Name/Handle]. All rights reserved. | <span id="currentTime"></span></p>
+        </div>
+    </footer>
 
-        article { 
-            margin-bottom: 20px; 
-            padding: 10px 20px; 
-            border: 1px solid rgb(145, 145, 145); 
-            margin-right: 10px; 
-        } 
-
-        aside { 
-            flex: 1; 
-            background-color: #c9c9c9; 
-            padding: 10px; 
-        } 
-
-        footer { 
-            background-color: #242424; 
-            color: #fff; 
-            text-align: center; 
-            position: fixed; 
-            bottom: 0; 
-            width: 100%; 
-        } 
-    </style> 
-    <title>Blogging Website Layout</title> 
-</head> 
-
-<body> 
-    <header> 
-        <h1>GeeksforGeeks</h1> 
-        <p>A computer science portal for geeks</p> 
-    </header> 
-
-    <nav> 
-        <a href="home.html">Home</a> 
-        <a href="diet">DIET TIPS</a> 
-        <a href="css">CSS</a> 
-        <a href="javascript">JavaScript</a> 
-        <a href="reactjs">ReactJS</a>
-        <a href="text_to_image">Text To Image</a>
-        <a href="nepali_unicode">Nepali Unicode</a>
-
-    </nav> 
-
-    <div class="container"> 
-        <main> 
-            <article> 
-                <h2>HTML</h2> 
-                <p class="post-meta"> 
-                    Published on December 11, 2023 by GeeksforGeeks 
-                </p> 
-                <p> 
-                    HTML stands for HyperText Markup Language. It is 
-                    used to design the web pages. With the help of HTML, 
-                    you can create a complete website structure. HTML 
-                    is the combination of Hypertext and Markup language. 
-                    Hypertext defines the link between the web pages 
-                    and markup language defines the text document within 
-                    the tag that define the structure of web pages. 
-                </p> 
-            </article> 
-
-            <article> 
-                <h2>CSS</h2> 
-                <p class="post-meta"> 
-                    Published on December 10, 2023 by GeeksforGeeks 
-                </p> 
-                <p> 
-                    CSS (Cascading Style Sheets) is used to styles web 
-                    pages. Cascading Style Sheets are fondly referred 
-                    to as CSS. The reason for using this is to simplify 
-                    the process of making web pages presentable. It allows 
-                    you to apply styles on web pages. More importantly, 
-                    it enables you to do this independently of the HTML 
-                    that makes up each web page. 
-                </p> 
-            </article> 
-
-            <article> 
-                <h2>JavaScript</h2> 
-                <p class="post-meta"> 
-                    Published on December 09, 2023 by GeeksforGeeks 
-                </p> 
-                <p> 
-                    JavaScript (JS) is the most popular lightweight, 
-                    interpreted compiled programming language. It can 
-                    be used for both Client-side as well as Server-side 
-                    developments. JavaScript also known as a scripting 
-                    language for web pages. This JavaScript Tutorial is 
-                    designed to help both beginners and experienced 
-                    professionals master the fundamentals of JavaScript 
-                    and unleash their creativity to build powerful web 
-                    applications. From basic syntax and data types to 
-                    advanced topics such as object-oriented programming 
-                    and DOM manipulation. 
-                </p> 
-            </article> 
-
-            <article> 
-                <h2>ReactJS</h2> 
-                <p class="post-meta"> 
-                    Published on December 08, 2023 by GeeksforGeeks 
-                </p> 
-                <p> 
-                    ReactJS is a declarative, efficient, and flexible 
-                    JavaScript library for building user interfaces. 
-                    It is an open-source, component-based front-end 
-                    library that is responsible only for the view layer 
-                    of the application. ReactJS is not a framework, it 
-                    is just a library developed by Facebook to solve 
-                    some problems that we were facing earlier. 
-                </p> 
-            </article> 
-        </main> 
-
-        <aside> 
-            <h2>Recent Posts</h2> 
-            <ul> 
-                <li><a href="#">HTML</a></li> 
-                <li><a href="#">CSS</a></li> 
-                <li><a href="#">JavaScript</a></li> 
-                <li><a href="#">ReactJS</a></li> 
-            </ul> 
-        </aside> 
-    </div> 
-
-    <footer> 
-        <p>© 2023 Your Blog Name. All rights reserved.</p> 
-    </footer> 
-</body> 
-
+    <script src="script.js"></script>
+</body>
 </html>
