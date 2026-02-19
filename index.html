@@ -45,74 +45,207 @@
             display: flex; align-items: center; justify-content: center; 
             text-align: center; 
             background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #0f172a 100%);
+            padding: 0 5%;
         }
-        .hero-content h1 { font-size: 4rem; font-weight: 700; margin-bottom: 1rem; opacity: 0; animation: fadeInUp 1s 0.5s forwards; }
+        .hero-content h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 700; margin-bottom: 1rem; opacity: 0; animation: fadeInUp 1s 0.5s forwards; }
         .hero-subtitle { 
-            font-size: 1.3rem; margin-bottom: 1rem; opacity: 0; animation: fadeInUp 1s 0.8s forwards; 
+            font-size: clamp(1.1rem, 4vw, 1.4rem); margin-bottom: 1rem; opacity: 0; animation: fadeInUp 1s 0.8s forwards; 
             color: #3b82f6; font-weight: 600;
         }
-        .hero-content .subtitle { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0; animation: fadeInUp 1s 1s forwards; color: #94a3b8; }
+        .hero-content .subtitle { font-size: clamp(1.1rem, 3vw, 1.6rem); margin-bottom: 2rem; opacity: 0; animation: fadeInUp 1s 1s forwards; color: #94a3b8; line-height: 1.7; }
         .hero-content .btn { 
-            display: inline-block; padding: 1rem 2rem; background: #3b82f6; color: white; 
-            text-decoration: none; border-radius: 50px; font-weight: 600; 
+            display: inline-block; padding: 1.1rem 2.5rem; background: #3b82f6; color: white; 
+            text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 1.1rem;
             transition: all 0.3s; opacity: 0; animation: fadeInUp 1s 1.3s forwards;
         }
         .hero-content .btn:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(59,130,246,0.4); }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Sections */
-        section { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
-        section h2 { font-size: 3rem; text-align: center; margin-bottom: 4rem; opacity: 0; transform: translateY(50px); transition: all 0.8s; }
+        /* Sections - Balanced spacing */
+        section { padding: 90px 5%; max-width: 1200px; margin: 0 auto; }
+        section h2 { font-size: clamp(2.2rem, 6vw, 3.2rem); text-align: center; margin-bottom: 3rem; opacity: 0; transform: translateY(50px); transition: all 0.8s; }
         section.visible h2 { opacity: 1; transform: translateY(0); }
 
-        /* About */
+        /* About - Perfect 2x2 desktop, 1col mobile */
         #about { background: rgba(255,255,255,0.05); }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-        .about-text h3 { color: #3b82f6; margin: 2rem 0 1rem 0; font-size: 1.5rem; }
-        .about-text p { font-size: 1.2rem; margin-bottom: 1.5rem; }
-        .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin: 2rem 0; }
-        .cert { background: rgba(59,130,246,0.2); padding: 1.5rem; border-radius: 15px; text-align: center; transition: all 0.3s; }
-        .cert:hover { background: rgba(59,130,246,0.4); transform: translateY(-5px); }
-
-        /* Experience & Projects */
-        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
-        .card { 
-            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); 
-            padding: 2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.4s; opacity: 0; transform: translateY(50px);
+        .about-2x2 { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 2rem; 
+            max-width: 1200px; 
+            margin: 0 auto;
         }
-        .cards.visible .card { opacity: 1; transform: translateY(0); }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.3); }
-        .card h3 { color: #3b82f6; margin-bottom: 1rem; }
-        .card i { font-size: 3rem; color: #3b82f6; margin-bottom: 1rem; }
-        .card ul { margin-top: 1rem; padding-left: 1.5rem; }
-        .card li { margin-bottom: 0.5rem; }
-
-        /* Skills */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 2rem; }
-        .skill-category { background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 15px; }
-        .skill-category h3 { margin-bottom: 1rem; color: #3b82f6; }
-
-        /* Contact */
-        #contact { background: rgba(30,41,59,0.5); }
-        #contact h2 { color: #3b82f6; }
-
-        /* Footer */
-        footer { text-align: center; padding: 3rem 5%; background: #0f172a; }
-
-        /* Mobile */
+        @media (min-width: 769px) {
+            .about-2x2 { 
+                grid-template-columns: 1fr 1fr; 
+                gap: 3rem 4rem; 
+            }
+        }
+        @media (min-width: 1024px) {
+            .about-2x2 { gap: 4rem; }
+        }
+        .about-card { 
+            background: rgba(255,255,255,0.08); 
+            padding: 2.5rem; 
+            border-radius: 20px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            min-height: 380px; 
+            display: flex; 
+            flex-direction: column; 
+            transition: all 0.3s ease;
+        }
+        .about-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+        .about-card h3 { color: #3b82f6; margin-bottom: 1.5rem; font-size: 1.7rem; }
+        .about-card p { font-size: 1.15rem; line-height: 1.8; color: #e2e8f0; flex: 1; }
+        .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
         @media (max-width: 768px) {
+            .certs-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+        }
+        .cert { 
+            padding: 1.2rem 0.8rem; 
+            background: rgba(255,255,255,0.2); 
+            border-radius: 12px; 
+            font-weight: 600; 
+            text-align: center; 
+            transition: all 0.3s ease; 
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        .cert:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 20px 40px rgba(59,130,246,0.4); background: rgba(255,255,255,0.3); }
+        .cert span { font-size: 0.85rem; display: block; margin-top: 0.3rem; opacity: 0.9; }
+        .edu-list { display: flex; flex-direction: column; gap: 1.5rem; height: 260px; justify-content: center; }
+        .edu-item { 
+            padding: 1.5rem; 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 12px; 
+            transition: all 0.3s ease; 
+            cursor: pointer;
+        }
+        .edu-item:hover { transform: translateY(-6px); box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+        .edu-item p:first-child { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.4rem; }
+        .edu-item p:last-child { color: #94a3b8; font-size: 1rem; }
+        .photo-section { 
+            text-align: center; 
+            min-height: 380px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            padding: 2rem; 
+            transition: all 0.3s ease;
+        }
+        .photo-section:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+        .photo-section img { 
+            width: 100%; 
+            max-width: 360px; 
+            height: 360px; 
+            object-fit: cover; 
+            border-radius: 22px; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5); 
+            margin: 0 auto; 
+            border: 4px solid rgba(255,255,255,0.2); 
+            transition: all 0.3s ease;
+            display: block;
+        }
+        .photo-section img:hover { transform: translateY(-8px); box-shadow: 0 45px 90px rgba(0,0,0,0.6); }
+        .photo-section p { color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-top: 1.5rem; }
+
+        /* Cards - Desktop looks premium */
+        .cards { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 769px) {
+            .cards { grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 2.5rem; }
+        }
+        @media (min-width: 1024px) {
+            .cards { gap: 3rem; }
+        }
+        .card { 
+            background: rgba(255,255,255,0.1); 
+            backdrop-filter: blur(15px); 
+            padding: 2.5rem; 
+            border-radius: 25px; 
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.4s; 
+            opacity: 0; 
+            transform: translateY(50px);
+        }
+        .cards.visible .card { opacity: 1; transform: translateY(0); animation: slideInUp 0.6s ease forwards; }
+        @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        .card:hover { transform: translateY(-12px); box-shadow: 0 40px 80px rgba(0,0,0,0.4); }
+        .card h3 { color: #3b82f6; margin-bottom: 1.2rem; font-size: 1.5rem; }
+        .card i { font-size: 3rem; color: #3b82f6; margin-bottom: 1.2rem; }
+        .card ul { margin-top: 1rem; padding-left: 1.5rem; }
+        .card li { margin-bottom: 0.6rem; font-size: 1.05rem; }
+
+        /* Skills - Looks great both ways */
+        .skills-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        @media (min-width: 769px) {
+            .skills-grid { grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 2rem; }
+        }
+        @media (min-width: 1024px) {
+            .skills-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+        }
+        .skill-category { 
+            background: rgba(255,255,255,0.08); 
+            padding: 2.5rem; 
+            border-radius: 20px; 
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        .skill-category:hover { transform: translateY(-5px); box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+        .skill-category h3 { margin-bottom: 1.2rem; color: #3b82f6; font-size: 1.5rem; }
+        .skill-category p { font-size: 1.1rem; color: #e2e8f0; }
+
+        /* Contact - Desktop row */
+        #contact { background: rgba(30,41,59,0.6); }
+        #contact .contact-buttons { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 1.5rem; 
+            margin: 2.5rem auto 3rem; 
+            max-width: 900px;
+        }
+        .contact-btn { 
+            color: #3b82f6; 
+            text-decoration: none; 
+            padding: 1.2rem 2.8rem; 
+            border-radius: 50px; 
+            font-weight: 600; 
+            transition: all 0.3s; 
+            display: inline-flex; 
+            align-items: center; 
+            font-size: 1.05rem;
+        }
+        .contact-btn.linkedin { color: white; background: rgba(0,0,0,0.4); border: 2px solid rgba(255,255,255,0.4); }
+        .contact-btn.phone { color: #10b981; background: rgba(16,185,129,0.15); border: 2px solid #10b981; }
+        .contact-btn.email { background: rgba(59,130,246,0.15); border: 2px solid #3b82f6; }
+        .contact-btn:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+
+        /* Mobile - Stack everything */
+        @media (max-width: 768px) {
+            section { padding: 60px 5%; }
             .hamburger { display: flex; }
             .nav-links { 
-                position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px); 
-                background: #0f172a; flex-direction: column; justify-content: start; align-items: center; 
-                padding-top: 2rem; transition: 0.3s; 
+                position: fixed; 
+                top: 80px; 
+                left: -100%; 
+                width: 100%; 
+                height: calc(100vh - 80px); 
+                background: #0f172a; 
+                flex-direction: column; 
+                justify-content: flex-start; 
+                align-items: center; 
+                padding-top: 2rem; 
+                transition: 0.3s; 
             }
             .nav-links.active { left: 0; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .hero-subtitle { font-size: 1.1rem; }
-            .about-grid { grid-template-columns: 1fr; }
-            section { padding: 80px 5%; }
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+            .contact-buttons { flex-direction: column; gap: 1.2rem; max-width: 100%; }
+            .contact-btn { width: 100%; justify-content: center; padding: 1.1rem 2rem; }
+            .certs-grid { grid-template-columns: repeat(3,1fr); }
+            .about-card, .card, .skill-category { padding: 2rem; }
         }
 
         /* Animations */
@@ -132,6 +265,7 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="Resume1.0.pdf">My Resume</a></li>
             </ul>
             <div class="hamburger">
                 <span></span><span></span><span></span>
@@ -144,97 +278,57 @@
         <div class="hero-content">
             <h1>Atish Ojha</h1>
             <p class="hero-subtitle">CCNA Certified | CEH Certified | MSc Cyber Security</p>
-            <p class="subtitle">I am a security-driven professional specializing in offensive defense and secure infrastructure. With an MSc in Cyber Security and CEH certification, I leverage a hacker’s mindset to identify vulnerabilities and harden network assets. By combining hands-on penetration testing with a foundation in CCNA networking, I build digital environments that are inherently protected against modern threats.</p>
+            <p class="subtitle">I am a security-driven professional specializing in offensive defense and secure infrastructure. With an MSc in Cyber Security and CEH certification, I leverage a hacker's mindset to identify vulnerabilities and harden network assets. By combining hands-on penetration testing with a foundation in CCNA networking, I build digital environments that are inherently protected against modern threats.</p>
             <a href="#about" class="btn">View My Skills</a>
         </div>
     </section>
 
-<!-- FULL #about WITH Hover Effects on ALL! -->
-<section id="about" class="reveal">
-    <h2 style="margin-bottom:3rem;text-align:center;">About & Certifications</h2>
-    
-    <div class="about-2x2" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem 3rem;max-width:1200px;margin:0 auto;">
-        
-        <!-- TOP LEFT: About Me -->
-        <div style="background:rgba(255,255,255,0.08);padding:2.5rem;border-radius:20px;border:1px solid rgba(255,255,255,0.1);min-height:380px;display:flex;flex-direction:column;transition:all 0.3s ease;">
-            <h3 style="color:#3b82f6;margin-bottom:1.5rem;font-size:1.7rem;">👨‍💼 About Me</h3>
-            <p style="font-size:1.15rem;line-height:1.8;color:#e2e8f0;flex:1;">
-                CCNA-certified MSc graduate with hands-on networking experience including <strong>VLAN deployments</strong> and Cisco lab environments. Strong IT support background from freelance work at Catalyst IT Consultancy. Currently expanding expertise through Microsoft 365 Admin (Apr 2026). <strong>London-based</strong> practical problem-solver.
-            </p>
-        </div>
+    <!-- About -->
+    <section id="about" class="reveal">
+        <h2>About & Certifications</h2>
+        <div class="about-2x2">
+            <!-- About Me -->
+            <div class="about-card">
+                <h3>👨‍💼 About Me</h3>
+                <p>CCNA-certified MSc graduate with hands-on networking experience including <strong>VLAN deployments</strong> and Cisco lab environments. Strong IT support background from freelance work at Catalyst IT Consultancy. Currently expanding expertise through Microsoft 365 Admin (Apr 2026). <strong>London-based</strong> practical problem-solver.</p>
+            </div>
 
-        <!-- TOP RIGHT: Certifications (HOVER WORKS!) -->
-        <div style="background:rgba(59,130,246,0.15);padding:2.5rem;border-radius:20px;border:1px solid rgba(59,130,246,0.3);min-height:380px;transition:all 0.3s ease;">
-            <h3 style="color:#3b82f6;margin-bottom:1.8rem;font-size:1.7rem;text-align:center;">🏆 Certifications</h3>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
-                <div class="cert" style="padding:1.2rem;background:rgba(255,255,255,0.2);border-radius:12px;font-weight:600;text-align:center;transition:all 0.3s ease;cursor:pointer;">
-                    CCNA<br><span style="font-size:0.85rem;">Jun 2024</span>
-                </div>
-                <div class="cert" style="padding:1.2rem;background:rgba(255,255,255,0.2);border-radius:12px;font-weight:600;text-align:center;transition:all 0.3s ease;cursor:pointer;">
-                    CEH Practical<br><span style="font-size:0.85rem;">Oct 2024</span>
-                </div>
-                <div class="cert" style="padding:1.2rem;background:rgba(255,255,255,0.2);border-radius:12px;font-weight:600;text-align:center;transition:all 0.3s ease;cursor:pointer;">
-                    CEH<br><span style="font-size:0.85rem;">Dec 2024</span>
-                </div>
-                <div class="cert" style="padding:1.2rem;background:rgba(16,185,129,0.25);border-radius:12px;font-weight:600;text-align:center;transition:all 0.3s ease;cursor:pointer;">
-                    eJPTv2<br><span style="font-size:0.85rem;">Jan 2024</span>
-                </div>
-                <div class="cert" style="padding:1.2rem;background:rgba(16,185,129,0.25);border-radius:12px;font-weight:600;text-align:center;transition:all 0.3s ease;cursor:pointer;">
-                    Google Cyber<br><span style="font-size:0.85rem;">Feb 2026</span>
-                </div>
-                <div class="cert" style="padding:1.2rem;background:rgba(16,185,129,0.25);border-radius:12px;font-weight:600;text-align:center;transition:all 0.3s ease;cursor:pointer;">
-                    MS365 Admin<br><span style="font-size:0.85rem;">Apr 2026</span>
+            <!-- Certifications -->
+            <div class="about-card" style="background: rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.3);">
+                <h3 style="color: #3b82f6; text-align: center;">🏆 Certifications</h3>
+                <div class="certs-grid">
+                    <div class="cert">CCNA<br><span>Jun 2024</span></div>
+                    <div class="cert">CEH Practical<br><span>Oct 2024</span></div>
+                    <div class="cert">CEH<br><span>Dec 2024</span></div>
+                    <div class="cert" style="background: rgba(16,185,129,0.25);">eJPTv2<br><span>Jan 2024</span></div>
+                    <div class="cert" style="background: rgba(16,185,129,0.25);">Google Cyber<br><span>Feb 2026</span></div>
+                    <div class="cert" style="background: rgba(16,185,129,0.25);">MS365 Admin<br><span>Apr 2026</span></div>
                 </div>
             </div>
-        </div>
 
-        <!-- BOTTOM LEFT: Education (HOVER MOVES!) -->
-        <div style="background:rgba(16,185,129,0.15);padding:2.5rem;border-radius:20px;border:1px solid rgba(16,185,129,0.3);min-height:380px;transition:all 0.3s ease;">
-            <h3 style="color:#10b981;margin-bottom:2rem;font-size:1.7rem;">🎓 Education</h3>
-            <div style="display:flex;flex-direction:column;gap:2rem;height:280px;justify-content:center;">
-                <div style="padding:1.5rem;background:rgba(255,255,255,0.1);border-radius:12px;transition:all 0.3s ease;cursor:pointer;" 
-                     onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.3)'" 
-                     onmouseout="this.style.transform='translateY(0px)';this.style.boxShadow=''">
-                    <p style="font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;">MSc Cyber Security with Advanced Practice</p>
-                    <p style="color:#94a3b8;font-size:1rem;">Northumbria University, UK | <em>2023</em></p>
-                </div>
-                <div style="padding:1.5rem;background:rgba(255,255,255,0.1);border-radius:12px;transition:all 0.3s ease;cursor:pointer;" 
-                     onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.3)'" 
-                     onmouseout="this.style.transform='translateY(0px)';this.style.boxShadow=''">
-                    <p style="font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;">B.E. Computer Science & Engineering</p>
-                    <p style="color:#94a3b8;font-size:1rem;">Visvesvaraya Technological University, India | <em>2018</em></p>
+            <!-- Education -->
+            <div class="about-card" style="background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.3);">
+                <h3 style="color: #10b981;">🎓 Education</h3>
+                <div class="edu-list">
+                    <div class="edu-item">
+                        <p>MSc Cyber Security with Advanced Practice</p>
+                        <p>Northumbria University, UK | <em>2023</em></p>
+                    </div>
+                    <div class="edu-item">
+                        <p>B.E. Computer Science & Engineering</p>
+                        <p>Visvesvaraya Technological University, India | <em>2018</em></p>
+                    </div>
                 </div>
             </div>
+
+            <!-- Photo -->
+            <div class="photo-section about-card">
+                <img src="atish.png" alt="Atish Ojha">
+                <p>📍 London, England, UK</p>
+                <p>IT & Cyber Security Professional</p>
+            </div>
         </div>
-
-        <!-- BOTTOM RIGHT: Wife Photo (HOVERS TOO!) -->
-        <div style="text-align:center;min-height:380px;display:flex;flex-direction:column;justify-content:center;padding:1rem;transition:all 0.3s ease;">
-            <img src="atish.png" alt="Atish Ojha" 
-                 style="width:100%;max-width:340px;height:340px;object-fit:cover;border-radius:22px;box-shadow:0 30px 60px rgba(0,0,0,0.5);display:block;margin:0 auto;border:4px solid rgba(255,255,255,0.2);transition:all 0.3s ease;cursor:pointer;" 
-                 onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 40px 80px rgba(0,0,0,0.6)'" 
-                 onmouseout="this.style.transform='translateY(0px)';this.style.boxShadow='0 30px 60px rgba(0,0,0,0.5)'">
-            <p style="color:#94a3b8;font-size:1.1rem;font-weight:500;margin-top:1rem;margin-bottom:0.25rem;">📍 London, England, UK</p>
-            <p style="color:#94a3b8;font-size:0.95rem;">IT & Cyber Security Professional</p>
-        </div>
-        
-    </div>
-
-    <!-- HOVER CSS (add to <style> or inline works) -->
-    <style>
-    .about-2x2 * {
-        transition: all 0.3s ease !important;
-    }
-    .about-2x2 div:hover {
-        transform: translateY(-6px) !important;
-        box-shadow: 0 25px 50px rgba(0,0,0,0.4) !important;
-    }
-    .about-2x2 .cert:hover {
-        transform: translateY(-4px) scale(1.05) !important;
-        box-shadow: 0 15px 30px rgba(59,130,246,0.4) !important;
-    }
-    </style>
-</section>
-
+    </section>
 
     <!-- Experience -->
     <section id="experience">
@@ -253,7 +347,7 @@
                 </ul>
             </div>
             <div class="card reveal">
-                <i class="fas fa-internship"></i>
+                <i class="fas fa-briefcase"></i>
                 <h3>IT Support & Networking (Internship)</h3>
                 <p><strong>Catalyst IT Consultancy LTD</strong> | Jan-Apr 2022</p>
                 <ul>
@@ -319,55 +413,54 @@
     <!-- Contact -->
     <section id="contact">
         <h2>Contact Me</h2>
-        <div style="text-align:center; max-width:800px; margin:0 auto;">
-            <p style="font-size:1.5rem; margin-bottom:2rem; color:#94a3b8;">
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.5rem; margin-bottom: 2.5rem; color: #94a3b8;">
                 Ready to discuss networking projects or IT opportunities in London?
             </p>
-            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem; margin-bottom:3rem;">
-                <a href="mailto:atishojha17@gmail.com?subject=Networking%20Job%20Opportunity%20-%20Atish%20Ojha%20(CCNA)" 
-                   style="color:#3b82f6; text-decoration:none; padding:1.2rem 2.5rem; background:rgba(59,130,246,0.1); border:2px solid #3b82f6; border-radius:50px; transition:all 0.3s; font-weight:500;">
-                    <i class="fas fa-envelope" style="margin-right:0.5rem;"></i> Email Me
+            <div class="contact-buttons">
+                <a href="mailto:atishojha17@gmail.com?subject=Networking%20Job%20Opportunity%20-%20Atish%20Ojha%20(CCNA)" class="contact-btn email">
+                    <i class="fas fa-envelope" style="margin-right: 0.8rem; font-size: 1.3rem;"></i> 
+                    Email Me
                 </a>
-                <a href="https://linkedin.com/in/atishojha17" target="_blank"
-                   style="color:white; text-decoration:none; padding:1.2rem 2.5rem; background:rgba(0,0,0,0.4); border:2px solid rgba(255,255,255,0.3); border-radius:50px; transition:all 0.3s; font-weight:500;">
-                    <i class="fab fa-linkedin" style="margin-right:0.5rem;"></i> View LinkedIn
+                <a href="https://linkedin.com/in/atishojha17" target="_blank" class="contact-btn linkedin">
+                    <i class="fab fa-linkedin" style="margin-right: 0.8rem; font-size: 1.3rem;"></i> 
+                    View LinkedIn
                 </a>
-                <a href="tel:+447835918497" 
-                   style="color:#10b981; text-decoration:none; padding:1.2rem 2.5rem; background:rgba(16,185,129,0.1); border:2px solid #10b981; border-radius:50px; transition:all 0.3s; font-weight:500;">
-                    <i class="fas fa-phone" style="margin-right:0.5rem;"></i> +44 7835 918497
+                <a href="tel:+447835918497" class="contact-btn phone">
+                    <i class="fas fa-phone" style="margin-right: 0.8rem; font-size: 1.3rem;"></i> 
+                    +44 7835 918497
                 </a>
             </div>
-            <p style="color:#94a3b8; font-size:1.1rem;">
+            <p style="color: #94a3b8; font-size: 1.15rem; line-height: 1.8;">
                 📍 <strong>London, England, UK</strong><br>
                 ✉️ <strong>atishojha17@gmail.com</strong><br>
-                📱 📱 Open to Cybersecurity Analyst, Junior Network Engineer, & IT Support roles
-
+                📱 Open to Cybersecurity Analyst, Junior Network Engineer, & IT Support roles
             </p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div style="display:flex;justify-content:center;gap:2rem;margin-bottom:1rem;">
-            <a href="https://linkedin.com/in/atishojha17" style="color:white;font-size:1.8rem;transition:0.3s;" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="mailto:atishojha17@gmail.com" style="color:white;font-size:1.8rem;transition:0.3s;"><i class="fas fa-envelope"></i></a>
-            <a href="tel:+447835918497" style="color:white;font-size:1.8rem;transition:0.3s;"><i class="fas fa-phone"></i></a>
+    <footer style="text-align: center; padding: 3rem 5%; background: #0f172a;">
+        <div style="display: flex; justify-content: center; gap: 2.5rem; margin-bottom: 1.5rem;">
+            <a href="https://linkedin.com/in/atishojha17" style="color: white; font-size: 2rem; transition: 0.3s;" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:atishojha17@gmail.com" style="color: white; font-size: 2rem; transition: 0.3s;"><i class="fas fa-envelope"></i></a>
+            <a href="tel:+447835918497" style="color: white; font-size: 2rem; transition: 0.3s;"><i class="fas fa-phone"></i></a>
         </div>
-        <p style="color:#94a3b8;">&copy; 2026 Atish Ojha | CCNA Certified Network Engineer | CEH Certified</p>
+        <p style="color: #94a3b8; font-size: 1.1rem;">&copy; 2026 Atish Ojha | CCNA Certified Network Engineer | CEH Certified</p>
     </footer>
 
     <script>
         // Mobile menu
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
-        hamburger.addEventListener('click', () => {
+        hamburger?.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             hamburger.classList.toggle('active');
         });
 
-        // Navbar scroll effect
+        // Navbar scroll
         window.addEventListener('scroll', () => {
-            document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
+            document.querySelector('nav')?.classList.toggle('scrolled', window.scrollY > 50);
         });
 
         // Scroll animations
@@ -379,14 +472,15 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.reveal, .cards').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal, .cards, .skill-category').forEach(el => observer.observe(el));
 
-        // Button hover effects
-        document.querySelectorAll('a[href^="mailto:"]').forEach(btn => {
-            btn.addEventListener('mouseenter', () => btn.style.transform = 'translateY(-3px)');
-            btn.addEventListener('mouseleave', () => btn.style.transform = 'translateY(0)');
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
         });
     </script>
 </body>
 </html>
-
