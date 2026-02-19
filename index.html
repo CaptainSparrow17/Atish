@@ -3,93 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atish Ojha - IT Enthusiast</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Atish Ojha | IT PRO</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+        }
+
+        /* Navbar */
+        nav { 
+            position: fixed; 
+            top: 0; left: 0; width: 100%; 
+            background: rgba(15, 23, 42, 0.95); 
+            backdrop-filter: blur(20px); 
+            z-index: 1000; 
+            padding: 1rem 5%; 
+            transition: all 0.3s ease;
+        }
+        nav.scrolled { background: rgba(15, 23, 42, 0.98); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #3b82f6; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; position: relative; transition: color 0.3s; }
+        .nav-links a:hover { color: #3b82f6; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #3b82f6; transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; }
+        .hamburger span { width: 25px; height: 3px; background: white; transition: 0.3s; }
+
+        /* Hero */
+        #hero { 
+            height: 100vh; 
+            display: flex; align-items: center; justify-content: center; 
+            text-align: center; 
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #0f172a 100%);
+        }
+        .hero-content h1 { font-size: 4rem; font-weight: 700; margin-bottom: 1rem; opacity: 0; animation: fadeInUp 1s 0.5s forwards; }
+        .hero-subtitle { 
+            font-size: 1.3rem; margin-bottom: 1rem; opacity: 0; animation: fadeInUp 1s 0.8s forwards; 
+            color: #3b82f6; font-weight: 600;
+        }
+        .hero-content .subtitle { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0; animation: fadeInUp 1s 1s forwards; color: #94a3b8; }
+        .hero-content .btn { 
+            display: inline-block; padding: 1rem 2rem; background: #3b82f6; color: white; 
+            text-decoration: none; border-radius: 50px; font-weight: 600; 
+            transition: all 0.3s; opacity: 0; animation: fadeInUp 1s 1.3s forwards;
+        }
+        .hero-content .btn:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(59,130,246,0.4); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Sections */
+        section { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
+        section h2 { font-size: 3rem; text-align: center; margin-bottom: 4rem; opacity: 0; transform: translateY(50px); transition: all 0.8s; }
+        section.visible h2 { opacity: 1; transform: translateY(0); }
+
+        /* About */
+        #about { background: rgba(255,255,255,0.05); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+        .about-text h3 { color: #3b82f6; margin: 2rem 0 1rem 0; font-size: 1.5rem; }
+        .about-text p { font-size: 1.2rem; margin-bottom: 1.5rem; }
+        .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin: 2rem 0; }
+        .cert { background: rgba(59,130,246,0.2); padding: 1.5rem; border-radius: 15px; text-align: center; transition: all 0.3s; }
+        .cert:hover { background: rgba(59,130,246,0.4); transform: translateY(-5px); }
+
+        /* Experience & Projects */
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .card { 
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); 
+            padding: 2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.4s; opacity: 0; transform: translateY(50px);
+        }
+        .cards.visible .card { opacity: 1; transform: translateY(0); }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.3); }
+        .card h3 { color: #3b82f6; margin-bottom: 1rem; }
+        .card i { font-size: 3rem; color: #3b82f6; margin-bottom: 1rem; }
+        .card ul { margin-top: 1rem; padding-left: 1.5rem; }
+        .card li { margin-bottom: 0.5rem; }
+
+        /* Skills */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 2rem; }
+        .skill-category { background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 15px; }
+        .skill-category h3 { margin-bottom: 1rem; color: #3b82f6; }
+
+        /* Contact */
+        #contact { background: rgba(30,41,59,0.5); }
+        #contact h2 { color: #3b82f6; }
+
+        /* Footer */
+        footer { text-align: center; padding: 3rem 5%; background: #0f172a; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { 
+                position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px); 
+                background: #0f172a; flex-direction: column; justify-content: start; align-items: center; 
+                padding-top: 2rem; transition: 0.3s; 
+            }
+            .nav-links.active { left: 0; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            section { padding: 80px 5%; }
+        }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Atish Ojha</h1>
-            <p class="tagline">Passionate IT Enthusiast & Lifelong Learner</p>
-        </div>
-    </header>
-
+    <!-- Navbar -->
     <nav>
-        <div class="container">
-            <ul>
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#interests">My Interests</a></li>
+        <div class="nav-container">
+            <div class="logo">Atish Ojha</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
-                 <li><a href="unicode.html" target="_blank" rel="noopener">
-    Nepali Unicode</a></li>
-                <li><a href="https://github.com/CaptainSparrow17/OBSIDIAN-NOTES">Notes</a></li>
-                <li><a href="Invoice.html">Invoice</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
         </div>
     </nav>
 
-    <main class="container">
-        <section id="hero">
-            <h2>Welcome to My Digital Space!</h2>
-            <p>Exploring the fascinating world of technology, one discovery at a time.</p>
-            <button id="ctaButton">Learn More About My Journey!</button>
-        </section>
-
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Hello! I'm Atish Ojha, an avid IT enthusiast. I'm fascinated by [mention a specific area like cybersecurity, networking, web development, cloud computing, etc.]. I love tinkering with hardware, exploring new software, and solving complex problems. This website is a small corner of the internet where I share my passion and journey.</p>
-        </section>
-
-        <section id="interests">
-            <h2>My Interests</h2>
-            <ul>
-                <li>Learning new programming languages (Currently exploring: [e.g., Python, JavaScript])</li>
-                <li>Setting up and managing home lab environments ([e.g., Proxmox, Docker])</li>
-                <li>Cybersecurity fundamentals and ethical hacking</li>
-                <li>Open Source Software and Communities</li>
-                <li>[Add another interest here]</li>
-            </ul>
-        </section>
-
-        <section id="projects">
-            <h2>Projects / Learning Goals</h2>
-            <div class="project-item">
-                <h3>Personal Website (This one!)</h3>
-                <p><strong>Goal:</strong> To learn HTML, CSS, and JavaScript basics and have an online presence.</p>
-                <p><strong>Status:</strong> In Progress!</p>
-            </div>
-            <div class="project-item">
-                <h3>[Your Next Learning Goal/Project Title]</h3>
-                <p><strong>Goal:</strong> [Describe what you want to learn or build]</p>
-                <p><strong>Status:</strong> Planning / Learning</p>
-            </div>
-            <!-- Add more project items as needed -->
-        </section>
-
-        <section id="contact">
-            <h2>Get in Touch</h2>
-            <p>I'm always happy to connect with fellow tech enthusiasts!</p>
-            <p>
-                You can find me on:
-                <!-- Replace # with your actual links -->
-                <a href="#" target="_blank">LinkedIn</a> |
-                <a href="#" target="_blank">GitHub</a> |
-                <a href="#" target="_blank">Twitter/X</a>
-                <!-- Or add: <p>Email: your-email@example.com</p> (Be cautious about spam) -->
-            </p>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>© 2023 [Your Name/Handle]. All rights reserved. | <span id="currentTime"></span></p>
+    <!-- Hero -->
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Atish Ojha</h1>
+            <p class="hero-subtitle">CCNA Certified | CEH Certified | MSc Cyber Security</p>
+            <p class="subtitle">I am a security-driven professional specializing in offensive defense and secure infrastructure. With an MSc in Cyber Security and CEH certification, I leverage a hacker’s mindset to identify vulnerabilities and harden network assets. By combining hands-on penetration testing with a foundation in CCNA networking, I build digital environments that are inherently protected against modern threats.</p>
+            <a href="#about" class="btn">View My Skills</a>
         </div>
+    </section>
+
+<!-- FULL #about WITH Hover Effects on ALL! -->
+<section id="about" class="reveal">
+    <h2 style="margin-bottom:3rem;text-align:center;">About & Certifications</h2>
+    
+    <div class="about-2x2" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem 3rem;max-width:1200px;margin:0 auto;">
+        
+        <!-- TOP LEFT: About Me -->
+        <div style="background:rgba(255,255,255,0.08);padding:2.5rem;border-radius:20px;border:1px solid rgba(255,255,255,0.1);min-height:380px;display:flex;flex-direction:column;transition:all 0.3s ease;">
+            <h3 style="color:#3b82f6;margin-bottom:1.5rem;font-size:1.7rem;">👨‍💼 About Me</h3>
+            <p style="font-size:1.15rem;line-height:1.8;color:#e2e8f0;flex:1;">
+                CCNA-certified MSc graduate with hands-on networking experience including <strong>VLAN deployments</strong> and Cisco lab environments. Strong IT support background from freelance work at Catalyst IT Consultancy. Currently expanding expertise through Microsoft 365 Admin (Apr 2026). <strong>London-based</strong> practical problem-solver.
+            </p>
+        </div>
+
+        <!-- TOP RIGHT: Certifications (HOVER WORKS!) -->
+        <div style="background:rgba(59,130,246,0.15);padding:2.5rem;border-radius:20px;border:1px solid rgba(59,130,246,0.3);min-height:380px;transition:all 0.3s ease;">
+            <h3 style="color:#3b82f6;margin-bottom:1.8rem;font-size:1.7rem;text-align:center;">🏆 Certifications</h3>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
+                <div class="cert" style="padding:1.2rem;background:rgba(255,255,255,0.2);border-radius:12px;font-weight:600;text-align:center;transition:all 0.3s ease;cursor:pointer;">
+                    CCNA<br><span style="font-size:0.85rem;">Jun 2024</span>
+                </div>
+                <div class="cert" style="padding:1.2rem;background:rgba(255,255,255,0.2);border-radius:12px;font-weight:600;text-align:center;transition:all 0.3s ease;cursor:pointer;">
+                    CEH Practical<br><span style="font-size:0.85rem;">Oct 2024</span>
+                </div>
+                <div class="cert" style="padding:1.2rem;background:rgba(255,255,255,0.2);border-radius:12px;font-weight:600;text-align:center;transition:all 0.3s ease;cursor:pointer;">
+                    CEH<br><span style="font-size:0.85rem;">Dec 2024</span>
+                </div>
+                <div class="cert" style="padding:1.2rem;background:rgba(16,185,129,0.25);border-radius:12px;font-weight:600;text-align:center;transition:all 0.3s ease;cursor:pointer;">
+                    eJPTv2<br><span style="font-size:0.85rem;">Jan 2024</span>
+                </div>
+                <div class="cert" style="padding:1.2rem;background:rgba(16,185,129,0.25);border-radius:12px;font-weight:600;text-align:center;transition:all 0.3s ease;cursor:pointer;">
+                    Google Cyber<br><span style="font-size:0.85rem;">Feb 2026</span>
+                </div>
+                <div class="cert" style="padding:1.2rem;background:rgba(16,185,129,0.25);border-radius:12px;font-weight:600;text-align:center;transition:all 0.3s ease;cursor:pointer;">
+                    MS365 Admin<br><span style="font-size:0.85rem;">Apr 2026</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM LEFT: Education (HOVER MOVES!) -->
+        <div style="background:rgba(16,185,129,0.15);padding:2.5rem;border-radius:20px;border:1px solid rgba(16,185,129,0.3);min-height:380px;transition:all 0.3s ease;">
+            <h3 style="color:#10b981;margin-bottom:2rem;font-size:1.7rem;">🎓 Education</h3>
+            <div style="display:flex;flex-direction:column;gap:2rem;height:280px;justify-content:center;">
+                <div style="padding:1.5rem;background:rgba(255,255,255,0.1);border-radius:12px;transition:all 0.3s ease;cursor:pointer;" 
+                     onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.3)'" 
+                     onmouseout="this.style.transform='translateY(0px)';this.style.boxShadow=''">
+                    <p style="font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;">MSc Cyber Security with Advanced Practice</p>
+                    <p style="color:#94a3b8;font-size:1rem;">Northumbria University, UK | <em>2023</em></p>
+                </div>
+                <div style="padding:1.5rem;background:rgba(255,255,255,0.1);border-radius:12px;transition:all 0.3s ease;cursor:pointer;" 
+                     onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.3)'" 
+                     onmouseout="this.style.transform='translateY(0px)';this.style.boxShadow=''">
+                    <p style="font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;">B.E. Computer Science & Engineering</p>
+                    <p style="color:#94a3b8;font-size:1rem;">Visvesvaraya Technological University, India | <em>2018</em></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM RIGHT: Wife Photo (HOVERS TOO!) -->
+        <div style="text-align:center;min-height:380px;display:flex;flex-direction:column;justify-content:center;padding:1rem;transition:all 0.3s ease;">
+            <img src="profile.jpg" alt="Atish Ojha" 
+                 style="width:100%;max-width:340px;height:340px;object-fit:cover;border-radius:22px;box-shadow:0 30px 60px rgba(0,0,0,0.5);display:block;margin:0 auto;border:4px solid rgba(255,255,255,0.2);transition:all 0.3s ease;cursor:pointer;" 
+                 onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 40px 80px rgba(0,0,0,0.6)'" 
+                 onmouseout="this.style.transform='translateY(0px)';this.style.boxShadow='0 30px 60px rgba(0,0,0,0.5)'">
+            <p style="color:#94a3b8;font-size:1.1rem;font-weight:500;margin-top:1rem;margin-bottom:0.25rem;">📍 London, England, UK</p>
+            <p style="color:#94a3b8;font-size:0.95rem;">IT & Cyber Security Professional</p>
+        </div>
+        
+    </div>
+
+    <!-- HOVER CSS (add to <style> or inline works) -->
+    <style>
+    .about-2x2 * {
+        transition: all 0.3s ease !important;
+    }
+    .about-2x2 div:hover {
+        transform: translateY(-6px) !important;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.4) !important;
+    }
+    .about-2x2 .cert:hover {
+        transform: translateY(-4px) scale(1.05) !important;
+        box-shadow: 0 15px 30px rgba(59,130,246,0.4) !important;
+    }
+    </style>
+</section>
+
+
+    <!-- Experience -->
+    <section id="experience">
+        <h2>Professional Experience</h2>
+        <div class="cards">
+            <div class="card reveal">
+                <i class="fas fa-tools"></i>
+                <h3>IT Support & Website Design (Freelancing)</h3>
+                <p><strong>Catalyst IT Consultancy LTD</strong> | Apr 2024 - Present</p>
+                <ul>
+                    <li>Website design/deployment, content updates, theme customization for clients</li>
+                    <li>Microsoft 365 user management (account unlocks, access permissions)</li>
+                    <li>Hardware install/troubleshoot (printers, workstations)</li>
+                    <li><strong>Network config for client sites (VLANs, Switches, Routers)</strong></li>
+                    <li>End-user technical support & workflow improvements</li>
+                </ul>
+            </div>
+            <div class="card reveal">
+                <i class="fas fa-internship"></i>
+                <h3>IT Support & Networking (Internship)</h3>
+                <p><strong>Catalyst IT Consultancy LTD</strong> | Jan-Apr 2022</p>
+                <ul>
+                    <li>Monitored and analyzed system and network logs to identify potential security issues</li>
+                    <li>Troubleshot and configured network devices for optimal performance</li>
+                    <li>Designed and developed responsive, user-friendly websites</li>
+                    <li>Contributed to IT projects and solution implementations</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+        <h2>Key Projects</h2>
+        <div class="cards">
+            <div class="card reveal">
+                <i class="fas fa-project-diagram"></i>
+                <h3>Network Design & Implementation for Small Business</h3>
+                <p><strong>Packet Tracer</strong></p>
+                <ul>
+                    <li>Designed comprehensive network infrastructure: routers, switches, wireless access points</li>
+                    <li>Configured Access Control Lists (ACLs) to manage traffic flows and enhance security</li>
+                    <li>Implemented OSPF routing protocol in multi-area network for scalability</li>
+                </ul>
+            </div>
+            <div class="card reveal">
+                <i class="fas fa-server"></i>
+                <h3>Home Lab Security Testing Environment</h3>
+                <p><strong>VMware</strong></p>
+                <ul>
+                    <li>Configured VMs running Kali Linux, Windows 10, Damn Vulnerable Web Application (DVWA)</li>
+                    <li>Conducted security testing and penetration tests to enhance practical skills</li>
+                    <li>Managed virtual networking and vulnerability assessments</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category reveal">
+                <h3>Networking</h3>
+                <p>Cisco IOS, VLANs, ACLs, OSPF, STP, Routing & Switching, Packet Tracer, Network Troubleshooting.</p>
+            </div>
+            <div class="skill-category reveal">
+                <h3>IT Platforms</h3>
+                <p>Microsoft 365 Admin, Windows Server/Workstation, DHCP/DNS, IP Addressing/Subnetting.</p>
+            </div>
+            <div class="skill-category reveal">
+                <h3>Systems & Virtualization</h3>
+                <p>VMware, Hyper-V, Linux & Windows Networking.</p>
+            </div>
+            <div class="skill-category reveal">
+                <h3>Tools & Protocols</h3>
+                <p>Wireshark, Nmap, PuTTY, SSH, TCP/IP, SNMP, Syslog.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <div style="text-align:center; max-width:800px; margin:0 auto;">
+            <p style="font-size:1.5rem; margin-bottom:2rem; color:#94a3b8;">
+                Ready to discuss networking projects or IT opportunities in London?
+            </p>
+            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem; margin-bottom:3rem;">
+                <a href="mailto:atishojha17@gmail.com?subject=Networking%20Job%20Opportunity%20-%20Atish%20Ojha%20(CCNA)" 
+                   style="color:#3b82f6; text-decoration:none; padding:1.2rem 2.5rem; background:rgba(59,130,246,0.1); border:2px solid #3b82f6; border-radius:50px; transition:all 0.3s; font-weight:500;">
+                    <i class="fas fa-envelope" style="margin-right:0.5rem;"></i> Email Me
+                </a>
+                <a href="https://linkedin.com/in/atishojha17" target="_blank"
+                   style="color:white; text-decoration:none; padding:1.2rem 2.5rem; background:rgba(0,0,0,0.4); border:2px solid rgba(255,255,255,0.3); border-radius:50px; transition:all 0.3s; font-weight:500;">
+                    <i class="fab fa-linkedin" style="margin-right:0.5rem;"></i> View LinkedIn
+                </a>
+                <a href="tel:+447835918497" 
+                   style="color:#10b981; text-decoration:none; padding:1.2rem 2.5rem; background:rgba(16,185,129,0.1); border:2px solid #10b981; border-radius:50px; transition:all 0.3s; font-weight:500;">
+                    <i class="fas fa-phone" style="margin-right:0.5rem;"></i> +44 7835 918497
+                </a>
+            </div>
+            <p style="color:#94a3b8; font-size:1.1rem;">
+                📍 <strong>London, England, UK</strong><br>
+                ✉️ <strong>atishojha17@gmail.com</strong><br>
+                📱 📱 Open to Cybersecurity Analyst, Junior Network Engineer, & IT Support roles
+
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div style="display:flex;justify-content:center;gap:2rem;margin-bottom:1rem;">
+            <a href="https://linkedin.com/in/atishojha17" style="color:white;font-size:1.8rem;transition:0.3s;" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:atishojha17@gmail.com" style="color:white;font-size:1.8rem;transition:0.3s;"><i class="fas fa-envelope"></i></a>
+            <a href="tel:+447835918497" style="color:white;font-size:1.8rem;transition:0.3s;"><i class="fas fa-phone"></i></a>
+        </div>
+        <p style="color:#94a3b8;">&copy; 2026 Atish Ojha | CCNA Certified Network Engineer | CEH Certified</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Mobile menu
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active', 'visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal, .cards').forEach(el => observer.observe(el));
+
+        // Button hover effects
+        document.querySelectorAll('a[href^="mailto:"]').forEach(btn => {
+            btn.addEventListener('mouseenter', () => btn.style.transform = 'translateY(-3px)');
+            btn.addEventListener('mouseleave', () => btn.style.transform = 'translateY(0)');
+        });
+    </script>
 </body>
 </html>
-
-
-
-
